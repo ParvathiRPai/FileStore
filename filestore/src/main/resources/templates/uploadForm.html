@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>OAuth2 Login AWS Cognito</title>
+<!--    https://getbootstrap.com/docs/4.5/getting-started/introduction/-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div>
+        <h1 class="title text-center" th:text="${message}"></h1>
+
+        <div sec:authorize="isAuthenticated()">
+            <p>Hello, <strong th:text="${#authentication.name}"></strong>!</p>
+            <p>Your authorities are: <strong th:each="authority : ${#authentication.authorities}"><span
+                    th:text="${authority.authority} + ' '"></span></strong></p>
+        </div>
+
+<!--        User area-->
+        <div sec:authorize="hasRole('USER')" class="alert alert-primary" role="alert">
+            This section is only visible only for ROLE_USER.
+        </div>
+
+<!--        Admin area-->
+        <div sec:authorize="hasRole('ADMIN')" class="alert alert-primary" role="alert">
+            This section is only visible only for ROLE_ADMIN.
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="alert alert-primary" role="alert">
+            This section is only visible only to authenticated users.
+            <div th:if="${message}">
+                <h2 th:text="${message}"/>
+            </div>
+
+            <div th:if="${username}">
+                Your user name is <strong th:text="${username}"/>
+                Your first name is <strong th:text="${firstName}"/>
+                Your last name is <strong th:text="${lastName}"/>
+                Your email is <strong th:text="${email}"/>
+            </div>
+
+            <div>
+                <form method="POST" enctype="multipart/form-data" action="/">
+                    <table>
+                        <tr>
+                            <td>File to upload:</td>
+                            <td><input type="file" name="file"/></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="Upload"/></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+            <div>
+                <ul>
+                    <li th:each="file : ${files}">
+                        <a th:href="@{/files(filename=${file})}" th:text="${file}"/>
+                        <a th:href="@{/delete/__${file}__}">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div sec:authorize="isAnonymous()">
+            <a class="btn btn-primary" th:href="@{/oauth2/authorization/cognito}" role="button">
+                Log in with Amazon Cognito
+            </a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <form method="post" th:action="@{/logout}">
+                <input type="submit" class="btn btn-danger" value="Logout"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

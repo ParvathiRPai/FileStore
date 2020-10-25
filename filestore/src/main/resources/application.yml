@@ -1,0 +1,28 @@
+spring:
+  servlet:
+    multipart.max-file-size: 10MB
+    multipart.max-request-size: 10MB
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            clientId: ${COGNITO_CLIENT_ID}
+            clientSecret: ${COGNITO_CLIENT_SECRET}
+            scope: openid
+            clientName: spring-boot-backend
+        provider:
+          cognito:
+            issuerUri: https://cognito-idp.${COGNITO_REGION}.amazonaws.com/${COGNITO_POOL_ID}
+            userNameAttribute: cognito:username
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:3306/${MYSQL_DBNAME}?serverTimezone=UTC
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+server:
+  forward-headers-strategy: framework
