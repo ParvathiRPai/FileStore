@@ -19,3 +19,19 @@
 
 #### Architecture of the project
 <img src="screenshots/Picture1.jpg" />
+
+## Flow
+1. Entry Page
+   <img src="screenshots/Picture2.jpg" />
+
+2. Login Page
+   <img src="screenshots/Picture3.jpg" />
+
+3. Signup page
+   <img src="screenshots/Picture7.jpg" />
+
+4. File upload and download
+   <img src="screenshots/Picture4.jpg" />
+
+5. For each file upload the details are tracked in AWS RDS which can be viewed via DataGrip
+   <img src="screenshots/Picture6.jpg" />
