@@ -30,8 +30,9 @@
 3. Signup page
    <img src="screenshots/Picture7.jpg" />
 
-4. File upload and download
+4. File upload, download (click the link testuser4/testfile3) and click the delete button to delete the file.
    <img src="screenshots/Picture4.jpg" />
+   <img src="screenshots/Picture8.jpg" />
 
 5. For each file upload the details are tracked in AWS RDS which can be viewed via DataGrip
    <img src="screenshots/Picture6.jpg" />
