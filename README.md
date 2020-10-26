@@ -1,5 +1,6 @@
 #### Additional details can be found in report.pdf
 
+### Demo of the project - via one drive https://1drv.ms/v/s!Atlj3hm1Xtus50i0PSmUi3M39IE_
 #### Technologies needed to run the project – 
 * Java -15, Gradle
 * AWS account access
