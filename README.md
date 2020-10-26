@@ -1,3 +1,5 @@
+#### Additional details can be found in report.pdf
+
 #### Technologies needed to run the project – 
 * Java -15, Gradle
 * AWS account access
